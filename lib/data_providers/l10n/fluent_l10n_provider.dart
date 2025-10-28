@@ -24,20 +24,20 @@ class FluentL10NProvider extends L10NProvider{
   //静态异步工厂方法 根据语言标识加载不同flt文件
   static Future<FluentL10NProvider> load(Locale locale) async{
     final FluentBundle bundle = FluentBundle(locale.toLanguageTag());
-    String src = "l10n/${locale.languageCode}.flt";
+    String src = "${locale.languageCode}.flt";
     switch(locale.languageCode) {
       case "zh":
         switch (locale.countryCode){
           case "TW":
-            src = "l10n/zh-TW.flt";
+            src = "zh-TW.flt";
             break;
           default:
-            src = "l10n/zh-CN.flt";
+            src = "zh-CN.flt";
             break;
         }
         break;
       case "nb":
-        src = "l10n/nb-NO.flt";
+        src = "nb-NO.flt";
         break;
     }
     String messages = await rootBundle.loadString(src);
@@ -267,6 +267,8 @@ class FluentL10NProvider extends L10NProvider{
     switch (locale.languageCode) {
       case "en":
         return "English";
+      case "nb":
+        return "Norsk Bokmål";
       case "zh":
         {
           switch (locale.countryCode) {
@@ -278,6 +280,7 @@ class FluentL10NProvider extends L10NProvider{
               return "中文";
           }
         }
+
     }
     return "<lang name>";//占位符字符串 避免返回空值
   }
