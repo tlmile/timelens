@@ -24,20 +24,20 @@ class FluentL10NProvider extends L10NProvider{
   //静态异步工厂方法 根据语言标识加载不同flt文件
   static Future<FluentL10NProvider> load(Locale locale) async{
     final FluentBundle bundle = FluentBundle(locale.toLanguageTag());
-    String src = "${locale.languageCode}.flt";
+    String src = "assets/l10n/${locale.languageCode}.flt";
     switch(locale.languageCode) {
       case "zh":
         switch (locale.countryCode){
           case "TW":
-            src = "zh-TW.flt";
+            src = "assets/l10n/zh-TW.flt";
             break;
           default:
-            src = "zh-CN.flt";
+            src = "assets/l10n/zh-CN.flt";
             break;
         }
         break;
       case "nb":
-        src = "nb-NO.flt";
+        src = "assets/l10n/nb-NO.flt";
         break;
     }
     String messages = await rootBundle.loadString(src);

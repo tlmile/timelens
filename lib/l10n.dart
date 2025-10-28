@@ -15,7 +15,9 @@ class L10N {
     //Fluent为提供人类可读的多语言文本格式，语言资源系统(第三方) == 怎么组织翻译文本
     Intl.defaultLocale = locale.languageCode;
     L10NProvider tr = await FluentL10NProvider.load(locale);
-    return L10N._internal(locale, tr, locale.languageCode == "en");
+    // return L10N._internal(locale, tr, locale.languageCode == "ar");
+    final bool rtl = Bidi.isRtlLanguage(locale.languageCode);
+    return L10N._internal(locale, tr, rtl);
   }
 
   //of：flutter经典命名约定，用于从BuildContext获取某个全局对象
