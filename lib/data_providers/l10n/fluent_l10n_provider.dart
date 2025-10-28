@@ -264,25 +264,32 @@ class FluentL10NProvider extends L10NProvider{
           "nagAboutMissingTimer";
   @override
   String langName(Locale locale) {
-    switch (locale.languageCode) {
-      case "en":
-        return "English";
-      case "nb":
-        return "Norsk Bokmål";
-      case "zh":
-        {
-          switch (locale.countryCode) {
-            case "CN":
-              return "中文（简体）";
-            case "TW":
-              return "中文（繁體）";
-            default:
-              return "中文";
-          }
-        }
+    // 未考虑 语言文字本身
+    // switch (locale.languageCode) {
+    //   case "en":
+    //     return "English";
+    //   case "nb":
+    //     return "Norsk Bokmål";
+    //   case "zh":
+    //     {
+    //       switch (locale.countryCode) {
+    //         case "CN":
+    //           return "中文（简体）";
+    //         case "TW":
+    //           return "中文（繁體）";
+    //         default:
+    //           return "中文";
+    //       }
+    //     }
+    // }
+    // return "<lang name>";//占位符字符串 避免返回空值
 
-    }
-    return "<lang name>";//占位符字符串 避免返回空值
+    final String languageTagKey = "langName-${locale.toLanguageTag()}";
+    final String languageCodeKey = "langName-${locale.languageCode}";
+    // _bundle.format("key") 表示拿出指定key对应的字符串
+    return _bundle.format(languageTagKey,errors: _errors) ?? _bundle.format(languageCodeKey,errors: _errors) ?? "<lang name>";
+
+
   }
 
   @override
